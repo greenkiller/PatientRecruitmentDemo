@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新药雷达 - 原型设计</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .prototype-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .screen {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .scrollable-content {
+            height: calc(100% - 104px); /* 减去头部和底部的高度 */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 20px;
+            position: absolute;
+            top: 54px; /* 头部高度 */
+            left: 0;
+            right: 0;
+            bottom: 50px; /* 底部导航栏高度 */
+        }
+
+        .screen-title {
+            text-align: center;
+            font-size: 14px;
+            padding: 10px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* 通用样式 */
+        .header {
+            height: 44px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-title {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 10px;
+            color: #07c160;
+        }
+
+        .search-bar {
+            margin: 8px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+        }
+
+        .search-bar i {
+            color: #999;
+            margin-right: 6px;
+        }
+
+        .search-input {
+            border: none;
+            background: transparent;
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .main-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin: 12px;
+            width: calc(100% - 24px);
+            text-align: center;
+        }
+
+        .project-list {
+            padding: 12px;
+        }
+
+        .project-item {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #eee;
+        }
+
+        .project-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .criteria-list {
+            padding: 12px;
+        }
+
+        .criteria-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .criteria-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #07c160;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+
+        .criteria-checked {
+            background: #07c160;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: white;
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .tab-item.active {
+            color: #07c160;
+        }
+
+        .tab-item i {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        /* 首页特殊样式 */
+        .home-camera {
+            width: 120px;
+            height: 120px;
+            background: #07c160;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 40px auto;
+            color: white;
+            font-size: 40px;
+        }
+
+        /* 拍照页面样式 */
+        .camera-view {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        .camera-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .capture-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            background: white;
+            border: 4px solid #666;
+        }
+
+        /* 详情页样式 */
+        .detail-info {
+            padding: 16px;
+        }
+
+        .detail-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .detail-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 16px 12px 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="prototype-container">
+        <!-- 首页 -->
+        <div class="screen">
+            <div class="screen-title">首页</div>
+            <div class="header">
+                <div class="header-title">新药雷达</div>
+            </div>
+            <div class="scrollable-content">
+                <div style="padding: 20px; text-align: center;">
+                    <div class="home-camera">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 30px;">拍摄病历</div>
+                    <div class="home-camera" style="background: #1890ff;">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div style="font-size: 14px; color: #666;">搜索项目</div>
+                </div>
+                <div class="section-title">推荐项目</div>
+                <div class="project-list">
+                    <div class="project-item">
+                        <div class="project-title">心血管疾病创新药物试验</div>
+                        <div class="project-desc">针对难治性高血压的新型药物研究</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">冠心病治疗新药研究</div>
+                        <div class="project-desc">双靶点抗血小板聚集新药临床试验</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">高血压新药临床研究</div>
+                        <div class="project-desc">新型降压药物的III期临床试验</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-title">心衰治疗创新方案</div>
+                        <div class="project-desc">慢性心力衰竭新型治疗方案研究</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item active">
+                    <i class="fas fa-home"></i>
+                    <span>首页</span>
+                </div>
+                <div class="tab-item">
+                    <i class="fas fa-hospital"></i>
+                    <span>科室项目</span>
+                </div>
+                <div class="tab-item">
+                    <i class="fas fa-user"></i>
+                    <span>我的</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 拍照页面 -->
+        <div class="screen">
+            <div class="screen-title">拍照页面</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">拍摄病历</div>
+            </div>
+            <div class="camera-view">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="camera-controls">
+                <div class="capture-btn"></div>
+            </div>
+        </div>
+
+        <!-- 照片预览和去标识化 -->
+        <div class="screen">
+            <div class="screen-title">照片预览</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">预览与处理</div>
+            </div>
+            <div style="padding: 16px;">
+                <div style="width: 100%; height: 300px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-image" style="font-size: 40px; color: #999;"></i>
+                </div>
+                <div style="margin-top: 16px;">
+                    <div class="main-btn">
+                        <i class="fas fa-upload"></i> 上传照片
+                    </div>
+                    <div class="main-btn" style="background: #666;">
+                        重新拍摄
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 匹配项目页面 -->
+        <div class="screen">
+            <div class="screen-title">匹配项目</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">匹配到的项目</div>
+            </div>
+            <div style="padding: 12px; background: #f8f8f8;">
+                <div style="font-size: 14px; color: #666;">
+                    根据病历信息，为您匹配到以下临床试验项目
+                </div>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div class="project-title">心血管疾病创新药物试验</div>
+                        <div style="color: #07c160; font-weight: 500;">匹配度 95%</div>
+                    </div>
+                    <div class="project-desc">针对难治性高血压的新型药物研究</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
+                        匹配要点：年龄符合、血压指标符合、既往治疗经历符合
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <div class="project-title">冠心病治疗新药研究</div>
+                        <div style="color: #07c160; font-weight: 500;">匹配度 85%</div>
+                    </div>
+                    <div class="project-desc">双靶点抗血小板聚集新药临床试验</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
+                        匹配要点：基础疾病符合、实验室检查符合
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目详情页 -->
+        <div class="screen">
+            <div class="screen-title">项目详情</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">项目详情</div>
+            </div>
+            <div class="scrollable-content">
+                <div class="detail-info">
+                    <div class="detail-title">心血管疾病创新药物试验</div>
+                    <div class="detail-meta">
+                        <div>项目编号: CT2024001</div>
+                        <div>试验分期: III期</div>
+                        <div>主要研究者: 张教授</div>
+                    </div>
+                </div>
+                <div class="section-title">入选标准</div>
+                <div class="criteria-list">
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox criteria-checked">
+                            <i class="fas fa-check" style="font-size: 12px;"></i>
+                        </div>
+                        <div>年龄 18-75 岁</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox criteria-checked">
+                            <i class="fas fa-check" style="font-size: 12px;"></i>
+                        </div>
+                        <div>确诊难治性高血压</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox criteria-checked">
+                            <i class="fas fa-check" style="font-size: 12px;"></i>
+                        </div>
+                        <div>血压控制不佳（收缩压≥140mmHg）</div>
+                    </div>
+                </div>
+                <div class="section-title">排除标准</div>
+                <div class="criteria-list">
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox">
+                        </div>
+                        <div>严重心、肝、肾功能不全</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox">
+                        </div>
+                        <div>近3个月内发生心血管事件</div>
+                    </div>
+                    <div class="criteria-item">
+                        <div class="criteria-checkbox">
+                        </div>
+                        <div>妊娠或哺乳期妇女</div>
+                    </div>
+                </div>
+                <div class="main-btn" style="background: #07c160;">
+                    推荐患者
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果页 -->
+        <div class="screen">
+            <div class="screen-title">搜索结果</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="search-bar" style="width: 280px;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="肺癌" value="肺癌">
+                </div>
+            </div>
+            <div style="padding: 12px;">
+                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        适应症 <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        试验分期 <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        筛选 <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div class="project-title">肺癌靶向药物临床试验</div>
+                    <div class="project-desc">针对EGFR突变的非小细胞肺癌患者的创新疗法</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">肺癌免疫联合治疗</div>
+                    <div class="project-desc">PD-1抑制剂联合化疗的III期临床试验</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-title">小细胞肺癌新药试验</div>
+                    <div class="project-desc">广泛期小细胞肺癌的新型靶向药物</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人中心 -->
+        <div class="screen">
+            <div class="screen-title">个人中心</div>
+            <div class="header">
+                <div class="header-title">我的</div>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 40px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
+                </div>
+                <div style="margin-top: 12px; font-size: 18px; font-weight: 500;">张医生</div>
+                <div style="color: #666; font-size: 14px;">心血管内科</div>
+            </div>
+            <div style="background: white; margin-top: 20px;">
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
+                    <i class="fas fa-history" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>推荐历史</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
+                    <i class="fas fa-star" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>收藏项目</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center;">
+                    <i class="fas fa-bell" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>消息通知</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item">
+                    <i class="fas fa-home"></i>
+                    <span>首页</span>
+                </div>
+                <div class="tab-item">
+                    <i class="fas fa-hospital"></i>
+                    <span>科室项目</span>
+                </div>
+                <div class="tab-item active">
+                    <i class="fas fa-user"></i>
+                    <span>我的</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐历史页面 -->
+        <div class="screen">
+            <div class="screen-title">推荐历史</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">推荐历史</div>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <div class="project-title">心血管疾病创新药物试验</div>
+                        <div style="font-size: 13px; color: #666;">2024-03-15</div>
+                    </div>
+                    <div class="project-desc">推荐患者：张三（住院号: 2024001）</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #07c160;">
+                        已通过筛选
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <div class="project-title">冠心病治疗新药研究</div>
+                        <div style="font-size: 13px; color: #666;">2024-03-10</div>
+                    </div>
+                    <div class="project-desc">推荐患者：李四（住院号: 2024002）</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #ff4d4f;">
+                        未通过筛选
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 收藏项目页面 -->
+        <div class="screen">
+            <div class="screen-title">收藏项目</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">收藏项目</div>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="project-title">心血管疾病创新药物试验</div>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                    </div>
+                    <div class="project-desc">针对难治性高血压的新型药物研究</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
+                        收藏时间：2024-03-15
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="project-title">冠心病治疗新药研究</div>
+                        <i class="fas fa-star" style="color: #ffc107;"></i>
+                    </div>
+                    <div class="project-desc">双靶点抗血小板聚集新药临床试验</div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
+                        收藏时间：2024-03-10
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 消息通知页面 -->
+        <div class="screen">
+            <div class="screen-title">消息通知</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">消息通知</div>
+            </div>
+            <div style="padding: 12px;">
+                <div style="background: white; border-radius: 8px; margin-bottom: 12px;">
+                    <div style="padding: 12px; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <div style="font-weight: 500;">筛选通过通知</div>
+                            <div style="font-size: 13px; color: #666;">10分钟前</div>
+                        </div>
+                        <div style="font-size: 14px; color: #666;">
+                            您推荐的患者张三已通过"心血管疾病创新药物试验"的筛选
+                        </div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <div style="font-weight: 500;">新项目通知</div>
+                            <div style="font-size: 13px; color: #666;">2小时前</div>
+                        </div>
+                        <div style="font-size: 14px; color: #666;">
+                            您所在科室新增临床试验项目"冠心病治疗新药研究"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
