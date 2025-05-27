@@ -343,16 +343,59 @@
                 </div>
                 <div class="header-title">预览与处理</div>
             </div>
-            <div style="padding: 16px;">
-                <div style="width: 100%; height: 300px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-image" style="font-size: 40px; color: #999;"></i>
-                </div>
-                <div style="margin-top: 16px;">
-                    <div class="main-btn">
-                        <i class="fas fa-upload"></i> 上传照片
+            <div class="scrollable-content">
+                <div style="padding: 16px;">
+                    <div style="margin-bottom: 12px; font-size: 14px; color: #666;">
+                        已上传 <span style="color: #07c160; font-weight: 500;">3</span> 张照片
                     </div>
-                    <div class="main-btn" style="background: #666;">
-                        重新拍摄
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <!-- 照片项 1 -->
+                        <div style="position: relative;">
+                            <div style="width: 100%; padding-bottom: 100%; background: #eee; border-radius: 8px; position: relative;">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-image" style="font-size: 24px; color: #999;"></i>
+                                </div>
+                                <div style="position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; background: rgba(0,0,0,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="fas fa-times" style="color: white; font-size: 12px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 照片项 2 -->
+                        <div style="position: relative;">
+                            <div style="width: 100%; padding-bottom: 100%; background: #eee; border-radius: 8px; position: relative;">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-image" style="font-size: 24px; color: #999;"></i>
+                                </div>
+                                <div style="position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; background: rgba(0,0,0,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="fas fa-times" style="color: white; font-size: 12px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 照片项 3 -->
+                        <div style="position: relative;">
+                            <div style="width: 100%; padding-bottom: 100%; background: #eee; border-radius: 8px; position: relative;">
+                                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-image" style="font-size: 24px; color: #999;"></i>
+                                </div>
+                                <div style="position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; background: rgba(0,0,0,0.5); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                    <i class="fas fa-times" style="color: white; font-size: 12px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 添加更多照片按钮 -->
+                        <div style="position: relative;">
+                            <div style="width: 100%; padding-bottom: 100%; background: #f5f5f5; border: 2px dashed #ddd; border-radius: 8px; position: relative; cursor: pointer;">
+                                <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666;">
+                                    <i class="fas fa-plus" style="font-size: 24px; margin-bottom: 4px;"></i>
+                                    <span style="font-size: 12px;">添加照片</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px;">
+                        <div class="main-btn">
+                            <i class="fas fa-upload"></i> 上传全部照片
+                        </div>
                     </div>
                 </div>
             </div>
