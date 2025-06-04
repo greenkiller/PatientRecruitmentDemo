@@ -275,37 +275,6 @@
             padding: 20px;
         }
 
-        .role-selector {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .role-option {
-            flex: 1;
-            padding: 16px;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .role-option.active {
-            border-color: #07c160;
-            background: #f6ffed;
-        }
-
-        .role-option i {
-            font-size: 24px;
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .role-option.active i {
-            color: #07c160;
-        }
-
         .form-group {
             margin-bottom: 16px;
         }
@@ -382,102 +351,285 @@
             border: 1px solid #ffa39e;
         }
 
+        /* 登录页面样式 */
+        .login-container {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .miniprogram-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            margin: 0 auto 12px;
+            background: #07c160;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        .miniprogram-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .wechat-login-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .wechat-login-btn:disabled {
+            background: #999;
+        }
+
+        .cancel-btn {
+            background: #f5f5f5;
+            color: #666;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .agreement-checkbox {
+            margin: 24px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            text-align: left;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .agreement-checkbox input {
+            margin-top: 3px;
+        }
+
+        .agreement-checkbox a {
+            color: #07c160;
+            text-decoration: none;
+        }
+
+        .agreement-checkbox a:hover {
+            opacity: 0.8;
+        }
+
+        /* 个人中心页面样式 */
+        .profile-container {
+            padding: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #999;
+            margin-right: 12px;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .profile-id {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .profile-menu {
+            margin-top: 20px;
+        }
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-menu-item i {
+            font-size: 20px;
+            margin-right: 12px;
+            color: #07c160;
+        }
+
+        .profile-menu-item span {
+            font-size: 16px;
+        }
+
+        /* 设置页面样式 */
+        .settings-container {
+            padding: 20px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .settings-item i {
+            font-size: 20px;
+            margin-right: 12px;
+            color: #07c160;
+        }
+
+        .settings-item span {
+            font-size: 16px;
+        }
+
+        .settings-item.danger {
+            color: #f5222d;
+        }
+
+        .settings-item.danger i {
+            color: #f5222d;
+        }
+
+        /* 我要报名页面样式 */
+        .apply-container {
+            padding: 20px;
+        }
+
+        .apply-form {
+            margin-bottom: 20px;
+        }
+
+        .apply-agreements {
+            margin-bottom: 20px;
+        }
+
+        .apply-agreement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .apply-agreement-item input {
+            margin-right: 8px;
+        }
+
+        .apply-agreement-item a {
+            color: #07c160;
+            text-decoration: none;
+        }
+
+        .apply-agreement-item a:hover {
+            opacity: 0.8;
+        }
+
+        .apply-submit-btn {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .apply-submit-btn:disabled {
+            background: #999;
+        }
+
+        /* 图片上传样式 */
+        .image-upload-container {
+            margin-bottom: 20px;
+        }
+
+        .image-upload-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .image-upload-input {
+            display: none;
+        }
+
+        .image-upload-button {
+            background: #07c160;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .image-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #f5222d;
+            color: white;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
     <div class="prototype-container">
-        <!-- 注册页面 -->
-        <div class="screen">
-            <div class="screen-title">注册</div>
-            <div class="header">
-                <div class="back-btn">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="header-title">注册账号</div>
-            </div>
-            <div class="scrollable-content">
-                <div class="register-container">
-                    <div class="role-selector">
-                        <div class="role-option active" onclick="selectRole('patient')">
-                            <i class="fas fa-user"></i>
-                            <div>我是患者</div>
-                        </div>
-                        <div class="role-option" onclick="selectRole('doctor')">
-                            <i class="fas fa-user-md"></i>
-                            <div>我是医生</div>
-                        </div>
-                    </div>
-                    <!-- 患者注册表单 -->
-                    <div id="patientForm">
-                        <div class="form-group">
-                            <label class="form-label">姓名</label>
-                            <input type="text" class="form-input" placeholder="请输入真实姓名">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">手机号码</label>
-                            <div class="verify-code-group">
-                                <input type="tel" class="form-input verify-code-input" placeholder="请输入手机号码">
-                                <button class="verify-code-button">获取验证码</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">验证码</label>
-                            <input type="text" class="form-input" placeholder="请输入验证码">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">所在省份</label>
-                            <select class="form-select" onchange="updateCities()">
-                                <option value="">请选择省份</option>
-                                <option value="beijing">北京市</option>
-                                <option value="shanghai">上海市</option>
-                                <option value="guangdong">广东省</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">所在城市</label>
-                            <select class="form-select">
-                                <option value="">请选择城市</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- 医生注册表单 -->
-                    <div id="doctorForm" style="display: none;">
-                        <div class="form-group">
-                            <label class="form-label">姓名</label>
-                            <input type="text" class="form-input" placeholder="请输入真实姓名">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">手机号码</label>
-                            <div class="verify-code-group">
-                                <input type="tel" class="form-input verify-code-input" placeholder="请输入手机号码">
-                                <button class="verify-code-button">获取验证码</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">验证码</label>
-                            <input type="text" class="form-input" placeholder="请输入验证码">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">所在医院</label>
-                            <input type="text" class="form-input" placeholder="请输入医院名称">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">所在科室</label>
-                            <select class="form-select">
-                                <option value="">请选择科室</option>
-                                <option value="cardiology">心内科</option>
-                                <option value="oncology">肿瘤科</option>
-                                <option value="neurology">神经内科</option>
-                                <option value="endocrinology">内分泌科</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button class="main-btn">注册</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 首页 -->
+        <!-- 1. 首页 -->
         <div class="screen">
             <div class="screen-title">首页</div>
             <div class="header">
@@ -515,155 +667,7 @@
             </div>
         </div>
 
-        <!-- 推荐项目页面 -->
-        <div class="screen">
-            <div class="screen-title">推荐项目</div>
-            <div class="header">
-                <div class="search-bar" style="width: 280px;">
-                    <i class="fas fa-search"></i>
-                    <input type="text" class="search-input" placeholder="搜索项目">
-                </div>
-            </div>
-            <div style="padding: 12px;">
-                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
-                        适应症 <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
-                        试验分期 <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
-                        筛选 <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="project-list">
-                <div class="project-item">
-                    <div class="project-title">心血管疾病创新药物试验</div>
-                    <div class="project-desc">针对难治性高血压的新型药物研究</div>
-                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
-                        医院：北京协和医院
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div class="project-title">冠心病治疗新药研究</div>
-                    <div class="project-desc">双靶点抗血小板聚集新药临床试验</div>
-                    <div style="margin-top: 8px; font-size: 13px; color: #666;">
-                        医院：上海瑞金医院
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 个人中心（医生版本）-->
-        <div class="screen">
-            <div class="screen-title">个人中心</div>
-            <div class="header">
-                <div class="header-title">我的</div>
-            </div>
-            <div style="padding: 20px; text-align: center;">
-                <div style="width: 80px; height: 80px; border-radius: 40px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user-md" style="font-size: 40px; color: #999;"></i>
-                </div>
-                <div style="margin-top: 12px; font-size: 18px; font-weight: 500;">张医生</div>
-                <div style="color: #666; font-size: 14px;">北京协和医院</div>
-                <div style="color: #666; font-size: 14px;">心血管内科</div>
-            </div>
-            <div style="background: white; margin-top: 20px;">
-                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
-                    <i class="fas fa-history" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>推荐历史</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
-                    <i class="fas fa-star" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>收藏项目</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-                <div style="padding: 16px; display: flex; align-items: center;">
-                    <i class="fas fa-bell" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>消息通知</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- 个人中心（患者版本）-->
-        <div class="screen">
-            <div class="screen-title">个人中心</div>
-            <div class="header">
-                <div class="header-title">我的</div>
-            </div>
-            <div style="padding: 20px; text-align: center;">
-                <div style="width: 80px; height: 80px; border-radius: 40px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
-                </div>
-                <div style="margin-top: 12px; font-size: 18px; font-weight: 500;">张三</div>
-                <div style="color: #666; font-size: 14px;">北京市</div>
-            </div>
-            <div style="background: white; margin-top: 20px;">
-                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
-                    <i class="fas fa-history" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>报名历史</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
-                    <i class="fas fa-star" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>收藏项目</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-                <div style="padding: 16px; display: flex; align-items: center;">
-                    <i class="fas fa-bell" style="color: #07c160; margin-right: 12px;"></i>
-                    <span>消息通知</span>
-                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- 推荐/报名历史页面 -->
-        <div class="screen">
-            <div class="screen-title">历史记录</div>
-            <div class="header">
-                <div class="back-btn">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="header-title">历史记录</div>
-            </div>
-            <div class="project-list">
-                <div class="project-item">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <div class="project-title">心血管疾病创新药物试验</div>
-                        <div style="font-size: 13px; color: #666;">2024-03-15</div>
-                    </div>
-                    <div class="project-desc">推荐患者：张三（住院号: 2024001）</div>
-                    <div style="margin-top: 8px;">
-                        <span class="status-tag status-passed">已通过</span>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <div class="project-title">冠心病治疗新药研究</div>
-                        <div style="font-size: 13px; color: #666;">2024-03-10</div>
-                    </div>
-                    <div class="project-desc">推荐患者：李四（住院号: 2024002）</div>
-                    <div style="margin-top: 8px;">
-                        <span class="status-tag status-pending">审核中</span>
-                    </div>
-                </div>
-                <div class="project-item">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <div class="project-title">高血压新药临床研究</div>
-                        <div style="font-size: 13px; color: #666;">2024-03-05</div>
-                    </div>
-                    <div class="project-desc">推荐患者：王五（住院号: 2024003）</div>
-                    <div style="margin-top: 8px;">
-                        <span class="status-tag status-rejected">未通过</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 拍照页面 -->
+        <!-- 2. 拍照页面 -->
         <div class="screen">
             <div class="screen-title">拍照页面</div>
             <div class="header">
@@ -680,7 +684,7 @@
             </div>
         </div>
 
-        <!-- 照片预览和去标识化 -->
+        <!-- 3. 照片预览和去标识化 -->
         <div class="screen">
             <div class="screen-title">照片预览</div>
             <div class="header">
@@ -747,7 +751,7 @@
             </div>
         </div>
 
-        <!-- 匹配项目页面 -->
+        <!-- 4. 匹配项目页面 -->
         <div class="screen">
             <div class="screen-title">匹配项目</div>
             <div class="header">
@@ -785,9 +789,9 @@
             </div>
         </div>
 
-        <!-- 项目详情页（医生视角）-->
+        <!-- 5. 项目详情页 -->
         <div class="screen">
-            <div class="screen-title">项目详情（医生视角）</div>
+            <div class="screen-title">项目详情</div>
             <div class="header">
                 <div class="back-btn">
                     <i class="fas fa-chevron-left"></i>
@@ -869,105 +873,388 @@
                             <div>对试验药物过敏</div>
                         </div>
                     </div>
-                    <div class="main-btn" style="background: #07c160;">
-                        推荐患者
+                    <div style="display: flex; gap: 12px; padding: 16px;">
+                        <button class="main-btn" style="margin: 0; background: #07c160;" onclick="handleRecommend()">推荐患者</button>
+                        <button class="main-btn" style="margin: 0; background: #1890ff;" onclick="handleApply()">我要报名</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 项目详情页（患者视角）-->
+        <!-- 6. 我要报名页面 -->
         <div class="screen">
-            <div class="screen-title">项目详情（患者视角）</div>
+            <div class="screen-title">我要报名</div>
             <div class="header">
                 <div class="back-btn">
                     <i class="fas fa-chevron-left"></i>
                 </div>
+                <div class="header-title">我要报名</div>
             </div>
             <div class="scrollable-content">
-                <div class="detail-container">
-                    <div class="detail-info">
-                        <div class="detail-title">心血管疾病创新药物试验</div>
-                        <div class="detail-meta">
-                            <div>项目编号: CVD-2024-001</div>
-                            <div>试验分期: III期</div>
-                            <div>主要研究者: 张教授</div>
-                            <div>招募人数: 300人</div>
-                            <div>报名截止日期: 2024-12-31</div>
-                            <div>发布时间: 2024-03-01</div>
+                <div style="padding: 16px;">
+                    <div style="font-size: 18px; font-weight: 500; margin-bottom: 20px;">
+                        心血管疾病创新药物试验
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">姓名 <span style="color: #ff4d4f;">*</span></label>
+                        <input type="text" class="form-input" placeholder="请输入真实姓名">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">手机 <span style="color: #ff4d4f;">*</span></label>
+                        <input type="tel" class="form-input" placeholder="请输入手机号码">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">疾病 <span style="color: #ff4d4f;">*</span></label>
+                        <select class="form-select">
+                            <option value="">请选择疾病类型</option>
+                            <option value="hypertension">高血压</option>
+                            <option value="diabetes">糖尿病</option>
+                            <option value="coronary">冠心病</option>
+                            <option value="stroke">脑卒中</option>
+                            <option value="heart_failure">心力衰竭</option>
+                            <option value="arrhythmia">心律失常</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">所在省份 <span style="color: #ff4d4f;">*</span></label>
+                        <select class="form-select" id="applyProvinceSelect" onchange="updateApplyCities()">
+                            <option value="">请选择省份</option>
+                            <option value="beijing">北京市</option>
+                            <option value="shanghai">上海市</option>
+                            <option value="guangdong">广东省</option>
+                            <option value="jiangsu">江苏省</option>
+                            <option value="zhejiang">浙江省</option>
+                            <option value="sichuan">四川省</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">所在城市 <span style="color: #ff4d4f;">*</span></label>
+                        <select class="form-select" id="applyCitySelect">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">备注</label>
+                        <textarea class="form-input" style="height: 100px; resize: none;" placeholder="请输入备注信息"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">病例图片</label>
+                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+                            可上传诊断报告、影像学报告和检查报告等
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                            <div class="upload-image-item">
+                                <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(this)">
+                                <label for="imageUpload" style="width: 100%; padding-bottom: 100%; background: #f5f5f5; border: 2px dashed #ddd; border-radius: 8px; position: relative; cursor: pointer; display: block;">
+                                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666;">
+                                        <i class="fas fa-plus" style="font-size: 20px; margin-bottom: 4px;"></i>
+                                        <span style="font-size: 12px;">上传图片</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <!-- 预览图片将在这里动态添加 -->
                         </div>
                     </div>
 
-                    <div class="section-title">入选标准</div>
-                    <div class="criteria-list">
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox criteria-checked">
-                                <i class="fas fa-check" style="font-size: 12px;"></i>
-                            </div>
-                            <div>年龄 18-75 岁</div>
+                    <div style="margin: 24px 0;">
+                        <div class="agreement-checkbox" style="margin-bottom: 12px;">
+                            <input type="checkbox" id="mainAgreement" required>
+                            <label for="mainAgreement">
+                                我同意<a href="#">《用户服务协议》</a><a href="#">《隐私政策》</a><a href="#">《敏感个人信息授权书》</a>
+                            </label>
                         </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox criteria-checked">
-                                <i class="fas fa-check" style="font-size: 12px;"></i>
-                            </div>
-                            <div>确诊难治性高血压</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox criteria-checked">
-                                <i class="fas fa-check" style="font-size: 12px;"></i>
-                            </div>
-                            <div>目前正在服用至少三种降压药物</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox criteria-checked">
-                                <i class="fas fa-check" style="font-size: 12px;"></i>
-                            </div>
-                            <div>血压控制不佳（收缩压≥140mmHg）</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox criteria-checked">
-                                <i class="fas fa-check" style="font-size: 12px;"></i>
-                            </div>
-                            <div>患者同意并签署知情同意书</div>
+                        <div class="agreement-checkbox">
+                            <input type="checkbox" id="sharingAgreement" required>
+                            <label for="sharingAgreement">
+                                我已阅读并同意<a href="#">《个人信息共享清单》</a>
+                            </label>
                         </div>
                     </div>
 
-                    <div class="section-title">排除标准</div>
-                    <div class="criteria-list">
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox exclusion">
-                            </div>
-                            <div>有严重心、肝、肾功能不全</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox exclusion">
-                            </div>
-                            <div>妊娠或哺乳期妇女</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox exclusion">
-                            </div>
-                            <div>近3个月内参与其他临床试验</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox exclusion">
-                            </div>
-                            <div>有严重精神疾病史</div>
-                        </div>
-                        <div class="criteria-item">
-                            <div class="criteria-checkbox exclusion">
-                            </div>
-                            <div>对试验药物过敏</div>
-                        </div>
+                    <button class="main-btn" onclick="handleApplySubmit()" id="submitButton" disabled>
+                        提交
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 登录页面 -->
+        <div class="screen">
+            <div class="screen-title">登录</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">登录</div>
+            </div>
+            <div class="scrollable-content">
+                <div class="login-container">
+                    <div class="miniprogram-logo">
+                        <i class="fas fa-flask"></i>
                     </div>
-                    <div class="main-btn" style="background: #1890ff;">
-                        报名
+                    <div class="miniprogram-name">新药雷达</div>
+                    
+                    <button class="wechat-login-btn" id="loginButton" disabled onclick="handlePhoneLogin()">
+                        <i class="fas fa-mobile-alt"></i>
+                        手机号快速登录
+                    </button>
+                    <button class="cancel-btn" onclick="handleCancel()">取消</button>
+
+                    <div class="agreement-checkbox">
+                        <input type="checkbox" id="agreementCheckbox" onchange="toggleLoginButton()">
+                        <label for="agreementCheckbox">
+                            我已阅读并同意<a href="#">《服务协议》</a><a href="#">《隐私政策》</a>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 搜索结果页 -->
+        <!-- 8. 注册页面 -->
+        <div class="screen">
+            <div class="screen-title">注册</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">注册账号</div>
+            </div>
+            <div class="scrollable-content">
+                <div class="register-container">
+                    <div class="form-group">
+                        <label class="form-label">姓名</label>
+                        <input type="text" class="form-input" placeholder="请输入真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">所在省份</label>
+                        <select class="form-select" id="provinceSelect" onchange="updateCities()">
+                            <option value="">请选择省份</option>
+                            <option value="beijing">北京市</option>
+                            <option value="shanghai">上海市</option>
+                            <option value="guangdong">广东省</option>
+                            <option value="jiangsu">江苏省</option>
+                            <option value="zhejiang">浙江省</option>
+                            <option value="sichuan">四川省</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">所在城市</label>
+                        <select class="form-select" id="citySelect">
+                            <option value="">请选择城市</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 24px;">
+                        <label class="checkbox-label" style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="doctorCheckbox" onchange="toggleDoctorFields()" style="margin-right: 8px;">
+                            <span>我是医生</span>
+                        </label>
+                    </div>
+
+                    <div id="doctorFields" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">所在医院</label>
+                            <input type="text" class="form-input" placeholder="请输入医院名称">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">所在科室</label>
+                            <select class="form-select">
+                                <option value="">请选择科室</option>
+                                <option value="cardiology">心内科</option>
+                                <option value="oncology">肿瘤科</option>
+                                <option value="neurology">神经内科</option>
+                                <option value="endocrinology">内分泌科</option>
+                                <option value="respiratory">呼吸科</option>
+                                <option value="gastroenterology">消化科</option>
+                                <option value="nephrology">肾内科</option>
+                                <option value="hematology">血液科</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="main-btn">完成注册</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. 个人中心（未登录） -->
+        <div class="screen">
+            <div class="screen-title">个人中心</div>
+            <div class="header">
+                <div class="header-title">我的</div>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 40px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="navigateToLogin()">
+                    <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
+                </div>
+                <div style="margin-top: 12px; font-size: 18px; font-weight: 500; color: #07c160; cursor: pointer;" onclick="navigateToLogin()">登录</div>
+                <div style="color: #666; font-size: 14px;">登录后开启更多功能</div>
+            </div>
+            <div style="background: white; margin-top: 20px;">
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;" onclick="checkLoginBeforeAction('推荐历史')">
+                    <i class="fas fa-history" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>推荐历史</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;" onclick="checkLoginBeforeAction('报名历史')">
+                    <i class="fas fa-clipboard-list" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>报名历史</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center;" onclick="checkLoginBeforeAction('消息通知')">
+                    <i class="fas fa-bell" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>消息通知</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. 个人中心（已登录） -->
+        <div class="screen">
+            <div class="screen-title">个人中心</div>
+            <div class="header">
+                <div class="header-title">我的</div>
+            </div>
+            <div style="padding: 20px; text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 40px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-user" style="font-size: 40px; color: #999;"></i>
+                </div>
+                <div style="margin-top: 12px; font-size: 18px; font-weight: 500;">张三</div>
+                <div style="color: #666; font-size: 14px;">账号：138****8888</div>
+            </div>
+            <div style="background: white; margin-top: 20px;">
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
+                    <i class="fas fa-history" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>推荐历史</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
+                    <i class="fas fa-clipboard-list" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>报名历史</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;">
+                    <i class="fas fa-bell" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>消息通知</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center;" onclick="toggleSettings()">
+                    <i class="fas fa-cog" style="color: #07c160; margin-right: 12px;"></i>
+                    <span>设置</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. 设置页面 -->
+        <div class="screen">
+            <div class="screen-title">设置</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">设置</div>
+            </div>
+            <div style="background: white; margin-top: 12px;">
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;" onclick="viewAgreement()">
+                    <span>查看服务协议</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center; border-bottom: 1px solid #eee;" onclick="viewPrivacy()">
+                    <span>查看隐私政策</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+                <div style="padding: 16px; display: flex; align-items: center;" onclick="handleLogout()">
+                    <span style="color: #ff4d4f;">退出登录</span>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; color: #999;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. 历史记录页面 -->
+        <div class="screen">
+            <div class="screen-title">历史记录</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">历史记录</div>
+            </div>
+            <div class="project-list">
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <div class="project-title">心血管疾病创新药物试验</div>
+                        <div style="font-size: 13px; color: #666;">2024-03-15</div>
+                    </div>
+                    <div class="project-desc">推荐患者：张三</div>
+                    <div style="margin-top: 8px;">
+                        <span class="status-tag status-passed">已通过</span>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <div class="project-title">冠心病治疗新药研究</div>
+                        <div style="font-size: 13px; color: #666;">2024-03-10</div>
+                    </div>
+                    <div class="project-desc">推荐患者：李四</div>
+                    <div style="margin-top: 8px;">
+                        <span class="status-tag status-pending">审核中</span>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <div class="project-title">高血压新药临床研究</div>
+                        <div style="font-size: 13px; color: #666;">2024-03-05</div>
+                    </div>
+                    <div class="project-desc">推荐患者：王五</div>
+                    <div style="margin-top: 8px;">
+                        <span class="status-tag status-rejected">未通过</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 13. 消息通知页面 -->
+        <div class="screen">
+            <div class="screen-title">消息通知</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">消息通知</div>
+            </div>
+            <div style="padding: 12px;">
+                <div style="background: white; border-radius: 8px; margin-bottom: 12px;">
+                    <div style="padding: 12px; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <div style="font-weight: 500;">筛选通过通知</div>
+                            <div style="font-size: 13px; color: #666;">10分钟前</div>
+                        </div>
+                        <div style="font-size: 14px; color: #666;">
+                            您推荐的患者张三已通过"心血管疾病创新药物试验"的筛选
+                        </div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <div style="font-weight: 500;">新项目通知</div>
+                            <div style="font-size: 13px; color: #666;">2小时前</div>
+                        </div>
+                        <div style="font-size: 14px; color: #666;">
+                            您所在科室新增临床试验项目"冠心病治疗新药研究"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14. 搜索结果页 -->
         <div class="screen">
             <div class="screen-title">搜索结果</div>
             <div class="header">
@@ -1008,67 +1295,41 @@
             </div>
         </div>
 
-        <!-- 收藏项目页面 -->
+        <!-- 15. 推荐项目页面 -->
         <div class="screen">
-            <div class="screen-title">收藏项目</div>
+            <div class="screen-title">推荐项目</div>
             <div class="header">
-                <div class="back-btn">
-                    <i class="fas fa-chevron-left"></i>
+                <div class="search-bar" style="width: 280px;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="搜索项目">
                 </div>
-                <div class="header-title">收藏项目</div>
+            </div>
+            <div style="padding: 12px;">
+                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        适应症 <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        试验分期 <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div style="flex: 1; text-align: center; padding: 8px; background: #f5f5f5; border-radius: 6px; font-size: 14px;">
+                        筛选 <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
             </div>
             <div class="project-list">
                 <div class="project-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="project-title">心血管疾病创新药物试验</div>
-                        <i class="fas fa-star" style="color: #ffc107;"></i>
-                    </div>
+                    <div class="project-title">心血管疾病创新药物试验</div>
                     <div class="project-desc">针对难治性高血压的新型药物研究</div>
                     <div style="margin-top: 8px; font-size: 13px; color: #666;">
-                        收藏时间：2024-03-15
+                        医院：北京协和医院
                     </div>
                 </div>
                 <div class="project-item">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="project-title">冠心病治疗新药研究</div>
-                        <i class="fas fa-star" style="color: #ffc107;"></i>
-                    </div>
+                    <div class="project-title">冠心病治疗新药研究</div>
                     <div class="project-desc">双靶点抗血小板聚集新药临床试验</div>
                     <div style="margin-top: 8px; font-size: 13px; color: #666;">
-                        收藏时间：2024-03-10
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 消息通知页面 -->
-        <div class="screen">
-            <div class="screen-title">消息通知</div>
-            <div class="header">
-                <div class="back-btn">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="header-title">消息通知</div>
-            </div>
-            <div style="padding: 12px;">
-                <div style="background: white; border-radius: 8px; margin-bottom: 12px;">
-                    <div style="padding: 12px; border-bottom: 1px solid #eee;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                            <div style="font-weight: 500;">筛选通过通知</div>
-                            <div style="font-size: 13px; color: #666;">10分钟前</div>
-                        </div>
-                        <div style="font-size: 14px; color: #666;">
-                            您推荐的患者张三已通过"心血管疾病创新药物试验"的筛选
-                        </div>
-                    </div>
-                    <div style="padding: 12px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                            <div style="font-weight: 500;">新项目通知</div>
-                            <div style="font-size: 13px; color: #666;">2小时前</div>
-                        </div>
-                        <div style="font-size: 14px; color: #666;">
-                            您所在科室新增临床试验项目"冠心病治疗新药研究"
-                        </div>
+                        医院：上海瑞金医院
                     </div>
                 </div>
             </div>
@@ -1076,36 +1337,30 @@
     </div>
 
     <script>
-        function selectRole(role) {
-            const patientForm = document.getElementById('patientForm');
-            const doctorForm = document.getElementById('doctorForm');
-            const roleOptions = document.querySelectorAll('.role-option');
+        // 省市联动数据
+        const cityData = {
+            beijing: ['东城区', '西城区', '朝阳区', '海淀区', '丰台区', '石景山区'],
+            shanghai: ['黄浦区', '徐汇区', '长宁区', '静安区', '普陀区', '虹口区', '浦东新区'],
+            guangdong: ['广州市', '深圳市', '珠海市', '佛山市', '东莞市', '中山市'],
+            jiangsu: ['南京市', '苏州市', '无锡市', '常州市', '南通市', '扬州市'],
+            zhejiang: ['杭州市', '宁波市', '温州市', '嘉兴市', '湖州市', '绍兴市'],
+            sichuan: ['成都市', '绵阳市', '德阳市', '乐山市', '泸州市', '达州市']
+        };
 
-            roleOptions.forEach(option => {
-                option.classList.remove('active');
-            });
+        function toggleDoctorFields() {
+            const doctorCheckbox = document.getElementById('doctorCheckbox');
+            const doctorFields = document.getElementById('doctorFields');
 
-            if (role === 'patient') {
-                patientForm.style.display = 'block';
-                doctorForm.style.display = 'none';
-                roleOptions[0].classList.add('active');
+            if (doctorCheckbox.checked) {
+                doctorFields.style.display = 'block';
             } else {
-                patientForm.style.display = 'none';
-                doctorForm.style.display = 'block';
-                roleOptions[1].classList.add('active');
+                doctorFields.style.display = 'none';
             }
         }
 
-        // 省市联动数据
-        const cityData = {
-            beijing: ['东城区', '西城区', '朝阳区', '海淀区'],
-            shanghai: ['黄浦区', '徐汇区', '浦东新区', '静安区'],
-            guangdong: ['广州市', '深圳市', '珠海市', '佛山市']
-        };
-
         function updateCities() {
-            const provinceSelect = document.querySelector('select');
-            const citySelect = document.querySelectorAll('select')[1];
+            const provinceSelect = document.getElementById('provinceSelect');
+            const citySelect = document.getElementById('citySelect');
             const province = provinceSelect.value;
             
             citySelect.innerHTML = '<option value="">请选择城市</option>';
@@ -1119,6 +1374,132 @@
                 });
             }
         }
+
+        function toggleLoginButton() {
+            const checkbox = document.getElementById('agreementCheckbox');
+            const loginButton = document.getElementById('loginButton');
+            loginButton.disabled = !checkbox.checked;
+        }
+
+        function handlePhoneLogin() {
+            // 这里添加微信小程序获取手机号的逻辑
+            console.log('Handling phone login...');
+        }
+
+        function handleCancel() {
+            // 处理取消登录
+            console.log('Login cancelled');
+        }
+
+        function handleRecommend() {
+            // 检查登录状态，如果未登录则跳转到登录页面
+            const isLoggedIn = false; // 这里需要实际检查登录状态
+            if (!isLoggedIn) {
+                // 跳转到登录页面
+                console.log('Redirecting to login page...');
+            } else {
+                // 处理推荐患者逻辑
+                console.log('Handling recommend...');
+            }
+        }
+
+        function handleApply() {
+            // 处理报名逻辑
+            console.log('Handling apply...');
+        }
+
+        function toggleSettings() {
+            // 跳转到设置页面
+            console.log('Navigate to settings page');
+        }
+
+        function viewAgreement() {
+            // 查看服务协议
+            console.log('View service agreement');
+        }
+
+        function viewPrivacy() {
+            // 查看隐私政策
+            console.log('View privacy policy');
+        }
+
+        function handleLogout() {
+            // 处理退出登录
+            console.log('Handle logout');
+        }
+
+        function navigateToLogin() {
+            // 跳转到登录页面
+            console.log('Navigate to login page');
+        }
+
+        function checkLoginBeforeAction(feature) {
+            // 未登录时点击功能项，提示需要登录
+            console.log('Please login to access ' + feature);
+            navigateToLogin();
+        }
+
+        function updateApplyCities() {
+            const provinceSelect = document.getElementById('applyProvinceSelect');
+            const citySelect = document.getElementById('applyCitySelect');
+            const province = provinceSelect.value;
+            
+            citySelect.innerHTML = '<option value="">请选择城市</option>';
+            
+            if (province && cityData[province]) {
+                cityData[province].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        }
+
+        function handleImageUpload(input) {
+            // 处理图片上传预览
+            if (input.files && input.files.length > 0) {
+                for (let i = 0; i < input.files.length; i++) {
+                    const file = input.files[i];
+                    // 创建预览
+                    const previewDiv = document.createElement('div');
+                    previewDiv.className = 'upload-image-item';
+                    previewDiv.innerHTML = `
+                        <div style="width: 100%; padding-bottom: 100%; background: #f5f5f5; border-radius: 8px; position: relative; overflow: hidden;">
+                            <img src="${URL.createObjectURL(file)}" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+                            <div style="position: absolute; top: 4px; right: 4px; width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="removeImage(this)">
+                                <i class="fas fa-times" style="color: white; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 插入到上传按钮之前
+                    const uploadButton = document.querySelector('.upload-image-item');
+                    uploadButton.parentNode.insertBefore(previewDiv, uploadButton);
+                }
+            }
+        }
+
+        function removeImage(element) {
+            element.closest('.upload-image-item').remove();
+        }
+
+        function checkAgreements() {
+            const mainAgreement = document.getElementById('mainAgreement');
+            const sharingAgreement = document.getElementById('sharingAgreement');
+            const submitButton = document.getElementById('submitButton');
+            
+            submitButton.disabled = !(mainAgreement.checked && sharingAgreement.checked);
+        }
+
+        function handleApplySubmit() {
+            // 处理表单提交
+            console.log('Handling form submission...');
+        }
+
+        // 添加协议复选框变化监听
+        document.getElementById('mainAgreement').addEventListener('change', checkAgreements);
+        document.getElementById('sharingAgreement').addEventListener('change', checkAgreements);
     </script>
 </body>
 </html> 
