@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新药雷达 - 原型设计</title>
+    <title>雷达招募 - 原型设计</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
         }
 
         body {
-            background: #f5f5f5;
+            background: #f7f7f7;
             padding: 20px;
         }
 
@@ -29,30 +29,33 @@
             width: 375px;
             height: 667px;
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border: 1px solid rgba(0,0,0,0.06);
         }
 
         .scrollable-content {
-            height: calc(100% - 104px); /* 减去头部和底部的高度 */
+            height: calc(100% - 104px);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             padding-bottom: 20px;
             position: absolute;
-            top: 54px; /* 头部高度 */
+            top: 54px;
             left: 0;
             right: 0;
-            bottom: 50px; /* 底部导航栏高度 */
+            bottom: 50px;
         }
 
         .screen-title {
             text-align: center;
-            font-size: 14px;
-            padding: 10px;
-            background: #f8f8f8;
-            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            padding: 8px;
+            background: #f0f0f0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+            font-weight: 400;
         }
 
         /* 通用样式 */
@@ -63,33 +66,46 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f0f0f0;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
         }
 
         .header-title {
-            font-size: 17px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
         .back-btn {
             position: absolute;
-            left: 10px;
+            left: 16px;
             color: #07c160;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(7, 193, 96, 0.1);
         }
 
         .search-bar {
-            margin: 8px 12px;
+            margin: 12px 16px;
             background: #f5f5f5;
-            border-radius: 8px;
+            border-radius: 20px;
             height: 36px;
             display: flex;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 16px;
+            border: 1px solid #e8e8e8;
         }
 
         .search-bar i {
             color: #999;
-            margin-right: 6px;
+            margin-right: 8px;
+            font-size: 14px;
         }
 
         .search-input {
@@ -98,79 +114,114 @@
             flex: 1;
             font-size: 14px;
             color: #333;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #999;
         }
 
         .main-btn {
-            background: #07c160;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
             font-size: 16px;
-            margin: 12px;
-            width: calc(100% - 24px);
+            font-weight: 500;
+            margin: 16px;
+            width: calc(100% - 32px);
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(7, 193, 96, 0.4);
+        }
+
+        .main-btn:active {
+            transform: translateY(0);
         }
 
         .project-list {
-            padding: 12px;
+            padding: 16px;
         }
 
         .project-item {
             background: white;
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 12px;
+            padding: 16px;
             margin-bottom: 12px;
-            border: 1px solid #eee;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
         }
 
         .project-title {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 8px;
+            color: #1a1a1a;
+            line-height: 1.4;
         }
 
         .project-desc {
             font-size: 14px;
             color: #666;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .criteria-list {
-            padding: 12px;
+            padding: 0 16px;
         }
 
         .criteria-item {
             display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .criteria-item:last-child {
+            border-bottom: none;
         }
 
         .criteria-checkbox {
             width: 20px;
             height: 20px;
             border: 2px solid #07c160;
-            border-radius: 4px;
+            border-radius: 6px;
             margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
         }
 
         .criteria-checkbox.criteria-checked {
-            background: #07c160;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-color: #07c160;
         }
 
-        /* 排除标准的勾选框样式 */
         .criteria-checkbox.exclusion {
-            border-color: #ff4d4f;
+            border-color: #ff6b6b;
         }
 
         .criteria-checkbox.exclusion.criteria-checked {
-            background: #ff4d4f;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
             color: white;
+            border-color: #ff6b6b;
         }
 
         .tab-bar {
@@ -181,7 +232,8 @@
             height: 50px;
             background: white;
             display: flex;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #f0f0f0;
+            box-shadow: 0 -1px 0 rgba(0,0,0,0.05);
         }
 
         .tab-item {
@@ -192,6 +244,8 @@
             justify-content: center;
             font-size: 12px;
             color: #999;
+            cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .tab-item.active {
@@ -207,31 +261,39 @@
         .home-camera {
             width: 120px;
             height: 120px;
-            background: #07c160;
-            border-radius: 60px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 40px auto;
             color: white;
             font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(7, 193, 96, 0.3);
+        }
+
+        .home-camera:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(7, 193, 96, 0.4);
         }
 
         /* 拍照页面样式 */
         .camera-view {
             width: 100%;
             height: 400px;
-            background: #000;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #ccc;
             font-size: 40px;
         }
 
         .camera-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 80px;
             left: 0;
             right: 0;
             display: flex;
@@ -244,30 +306,61 @@
             height: 70px;
             border-radius: 35px;
             background: white;
-            border: 4px solid #666;
+            border: 4px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .capture-btn:hover {
+            transform: scale(1.05);
+            border-color: #07c160;
         }
 
         /* 详情页样式 */
         .detail-info {
-            padding: 16px;
+            padding: 20px;
+            background: white;
+            margin: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
         }
 
         .detail-title {
             font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            line-height: 1.3;
         }
 
         .detail-meta {
             font-size: 14px;
             color: #666;
             margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .detail-meta > div {
+            margin-bottom: 4px;
         }
 
         .section-title {
             font-size: 16px;
-            font-weight: 500;
-            margin: 16px 12px 8px;
+            font-weight: 600;
+            margin: 20px 16px 12px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
+            border-radius: 2px;
+            margin-right: 8px;
         }
 
         /* 注册页面样式 */
@@ -276,7 +369,7 @@
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .form-label {
@@ -284,23 +377,41 @@
             color: #333;
             margin-bottom: 8px;
             display: block;
+            font-weight: 500;
         }
 
         .form-input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 12px 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
             font-size: 14px;
+            background: #fafafa;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #07c160;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
         }
 
         .form-select {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 12px 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
             font-size: 14px;
             background: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-select:focus {
+            border-color: #07c160;
+            box-shadow: 0 0 0 3px rgba(7, 193, 96, 0.1);
         }
 
         .verify-code-group {
@@ -314,27 +425,32 @@
 
         .verify-code-button {
             width: 120px;
-            background: #07c160;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .verify-code-button:disabled {
-            background: #999;
+            background: #ddd;
+            cursor: not-allowed;
         }
 
         /* 状态标签样式 */
         .status-tag {
             display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 4px 12px;
+            border-radius: 12px;
             font-size: 12px;
+            font-weight: 500;
         }
 
         .status-passed {
-            background: #f6ffed;
+            background: #f0f9ef;
             color: #52c41a;
             border: 1px solid #b7eb8f;
         }
@@ -346,285 +462,752 @@
         }
 
         .status-rejected {
-            background: #fff1f0;
+            background: #fff2f0;
             color: #f5222d;
-            border: 1px solid #ffa39e;
+            border: 1px solid #ffccc7;
         }
 
         /* 登录页面样式 */
         .login-container {
-            padding: 40px 20px;
+            padding: 60px 20px 40px;
             text-align: center;
         }
 
         .miniprogram-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            margin: 0 auto 12px;
-            background: #07c160;
+            width: 88px;
+            height: 88px;
+            border-radius: 20px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
+            font-size: 44px;
+            box-shadow: 0 8px 24px rgba(7, 193, 96, 0.3);
         }
 
         .miniprogram-name {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 40px;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 60px;
+            color: #1a1a1a;
         }
 
         .wechat-login-btn {
-            background: #07c160;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: 500;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(7, 193, 96, 0.3);
         }
 
         .wechat-login-btn:disabled {
-            background: #999;
+            background: #ddd;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .wechat-login-btn:not(:disabled):hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(7, 193, 96, 0.4);
         }
 
         .cancel-btn {
             background: #f5f5f5;
             color: #666;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: 500;
             width: 100%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #e8e8e8;
         }
 
         .agreement-checkbox {
-            margin: 24px 0;
+            margin: 32px 0 24px;
             display: flex;
             align-items: flex-start;
             gap: 8px;
             text-align: left;
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .agreement-checkbox input {
             margin-top: 3px;
+            accent-color: #07c160;
         }
 
         .agreement-checkbox a {
             color: #07c160;
             text-decoration: none;
+            font-weight: 500;
         }
 
         .agreement-checkbox a:hover {
             opacity: 0.8;
         }
 
-        /* 个人中心页面样式 */
-        .profile-container {
-            padding: 20px;
+        /* 图片上传优化 */
+        .upload-image-item label {
+            transition: all 0.2s ease;
         }
 
-        .profile-header {
+        .upload-image-item label:hover {
+            border-color: #07c160;
+            background: #f9f9f9;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .prototype-container {
+                gap: 15px;
+            }
+            
+            .screen {
+                width: 350px;
+                height: 600px;
+            }
+        }
+
+        /* 报名页面样式 */
+        #apply-page {
+            width: 375px;
+            height: 667px;
+            background: #f7f7f7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #apply-page .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: #fff;
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            padding: 0 16px;
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 100;
         }
 
-        .profile-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #f5f5f5;
+        #apply-page .back-btn {
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: #999;
-            margin-right: 12px;
+            color: #07c160;
+            font-size: 20px;
         }
 
-        .profile-info {
+        #apply-page .title {
             flex: 1;
-        }
-
-        .profile-name {
+            text-align: center;
             font-size: 16px;
             font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .profile-id {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .profile-menu {
-            margin-top: 20px;
-        }
-
-        .profile-menu-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .profile-menu-item i {
-            font-size: 20px;
-            margin-right: 12px;
-            color: #07c160;
-        }
-
-        .profile-menu-item span {
-            font-size: 16px;
-        }
-
-        /* 设置页面样式 */
-        .settings-container {
-            padding: 20px;
-        }
-
-        .settings-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .settings-item i {
-            font-size: 20px;
-            margin-right: 12px;
-            color: #07c160;
-        }
-
-        .settings-item span {
-            font-size: 16px;
-        }
-
-        .settings-item.danger {
-            color: #f5222d;
-        }
-
-        .settings-item.danger i {
-            color: #f5222d;
-        }
-
-        /* 我要报名页面样式 */
-        .apply-container {
-            padding: 20px;
-        }
-
-        .apply-form {
-            margin-bottom: 20px;
-        }
-
-        .apply-agreements {
-            margin-bottom: 20px;
-        }
-
-        .apply-agreement-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .apply-agreement-item input {
-            margin-right: 8px;
-        }
-
-        .apply-agreement-item a {
-            color: #07c160;
-            text-decoration: none;
-        }
-
-        .apply-agreement-item a:hover {
-            opacity: 0.8;
-        }
-
-        .apply-submit-btn {
-            background: #07c160;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 16px;
-            width: 100%;
-        }
-
-        .apply-submit-btn:disabled {
-            background: #999;
-        }
-
-        /* 图片上传样式 */
-        .image-upload-container {
-            margin-bottom: 20px;
-        }
-
-        .image-upload-label {
-            font-size: 14px;
             color: #333;
-            margin-bottom: 8px;
-            display: block;
         }
 
-        .image-upload-input {
-            display: none;
+        #apply-page .content {
+            padding: 54px 16px 20px;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .image-upload-button {
-            background: #07c160;
-            color: white;
-            border: none;
-            padding: 10px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
+        #apply-page .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        .image-preview-container {
+        #apply-page .form-group {
+            margin-bottom: 15px;
+        }
+
+        #apply-page .form-item {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 10px;
         }
 
-        .image-preview {
-            width: 100px;
+        #apply-page .form-label {
+            width: 70px;
+            font-size: 14px;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        #apply-page .required {
+            color: #ff4d4f;
+            margin-left: 2px;
+        }
+
+        #apply-page .form-input {
+            flex: 1;
+            height: 32px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #apply-page .phone-input-group {
+            flex: 1;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            min-width: 0;
+        }
+
+        #apply-page .phone-input {
+            flex: 2;
+            height: 32px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 14px;
+            color: #333;
+            min-width: 0;
+        }
+
+        #apply-page .get-phone-btn {
+            flex: 1;
+            min-width: 90px;
+            height: 32px;
+            background: #07c160;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 8px;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        #apply-page .radio-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #apply-page .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        #apply-page .picker-view {
+            flex: 1;
+            height: 32px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #apply-page .picker-view span:first-child {
+            color: #999;
+            text-align: right;
+            flex: 1;
+            padding-right: 8px;
+        }
+
+        #apply-page .picker-arrow {
+            color: #999;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        #apply-page .form-textarea {
+            width: 100%;
             height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #apply-page .medical-image-label {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        #apply-page .upload-tip {
+            font-size: 12px;
+            color: #999;
+            margin-left: 4px;
+        }
+
+        #apply-page .image-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        #apply-page .upload-btn {
+            width: 100%;
+            padding-bottom: 100%;
+            background: #f5f5f5;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
             position: relative;
         }
 
-        .image-preview img {
+        #apply-page .upload-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #999;
+        }
+
+        #apply-page .upload-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            font-size: 12px;
+            color: #666;
+        }
+
+        #apply-page .privacy-tip {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.5;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        #apply-page .agreement-group {
+            margin: 15px 0;
+        }
+
+        #apply-page .agreement-item {
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        #apply-page .link {
+            color: #07c160;
+            display: inline;
+        }
+
+        #apply-page .submit-btn {
+            width: 100%;
+            height: 44px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* 推荐患者页面样式 */
+        #recommend-page {
+            width: 375px;
+            height: 667px;
+            background: #f7f7f7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #recommend-page .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 100;
+        }
+
+        #recommend-page .back-btn {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #07c160;
+            font-size: 20px;
+        }
+
+        #recommend-page .title {
+            flex: 1;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        #recommend-page .content {
+            padding: 54px 16px 20px;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #recommend-page .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #recommend-page .form-group {
+            margin-bottom: 15px;
+        }
+
+        #recommend-page .form-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #recommend-page .form-label {
+            width: 70px;
+            font-size: 14px;
+            color: #333;
+            flex-shrink: 0;
+        }
+
+        #recommend-page .required {
+            color: #ff4d4f;
+            margin-left: 2px;
+        }
+
+        #recommend-page .form-input {
+            flex: 1;
+            height: 32px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #recommend-page .radio-group {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #recommend-page .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        #recommend-page .picker-view {
+            flex: 1;
+            height: 32px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #recommend-page .picker-view span:first-child {
+            color: #999;
+            text-align: right;
+            flex: 1;
+            padding-right: 8px;
+        }
+
+        #recommend-page .picker-arrow {
+            color: #999;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        #recommend-page .form-textarea {
+            width: 100%;
+            height: 100px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        #recommend-page .medical-image-label {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        #recommend-page .upload-tip {
+            font-size: 12px;
+            color: #999;
+            margin-left: 4px;
+        }
+
+        #recommend-page .image-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        #recommend-page .upload-btn {
+            width: 100%;
+            padding-bottom: 100%;
+            background: #f5f5f5;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        #recommend-page .upload-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #999;
+        }
+
+        #recommend-page .upload-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            font-size: 12px;
+            color: #666;
+        }
+
+        #recommend-page .privacy-tip {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.5;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+
+        #recommend-page .agreement-group {
+            margin: 15px 0;
+        }
+
+        #recommend-page .agreement-item {
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        #recommend-page .link {
+            color: #07c160;
+            display: inline;
+        }
+
+        #recommend-page .submit-btn {
+            width: 100%;
+            height: 44px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* 详情页通用样式 */
+        .detail-container {
+            padding: 16px;
+        }
+
+        .info-list {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            width: 100px;
+            color: #666;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .image-item {
+            width: 100%;
+            padding-bottom: 100%;
+            background: #f5f5f5;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-item img {
+            position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .image-remove-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #f5222d;
-            color: white;
-            border: none;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 12px;
-            cursor: pointer;
+        .review-info {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
         }
 
+        .review-item {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-label {
+            width: 100px;
+            color: #666;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .review-value {
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .resubmit-section {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .resubmit-section .form-group {
+            margin-bottom: 16px;
+        }
+
+        .resubmit-section .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .resubmit-section .form-textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border: 1px solid #e8e8e8;
+            border-radius: 4px;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .resubmit-section .submit-btn {
+            width: 100%;
+            height: 44px;
+            background: linear-gradient(135deg, #07c160 0%, #05a150 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 22px;
+            border: none;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -633,7 +1216,7 @@
         <div class="screen">
             <div class="screen-title">首页</div>
             <div class="header">
-                <div class="header-title">新药雷达</div>
+                <div class="header-title">雷达招募</div>
             </div>
             <div class="scrollable-content">
                 <div style="padding: 20px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
@@ -744,7 +1327,7 @@
                     </div>
                     <div style="margin-top: 24px;">
                         <div class="main-btn">
-                            <i class="fas fa-upload"></i> 上传全部照片
+                            <i class="fas fa-upload"></i> 提交
                         </div>
                     </div>
                 </div>
@@ -881,109 +1464,247 @@
             </div>
         </div>
 
-        <!-- 6. 我要报名页面 -->
-        <div class="screen">
-            <div class="screen-title">我要报名</div>
+        <!-- 5.1 推荐患者页面 -->
+        <section id="recommend-page" class="page">
             <div class="header">
-                <div class="back-btn">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="header-title">我要报名</div>
+                <div class="back-btn">←</div>
+                <div class="title">推荐患者</div>
             </div>
-            <div class="scrollable-content">
-                <div style="padding: 16px;">
-                    <div style="font-size: 18px; font-weight: 500; margin-bottom: 20px;">
-                        心血管疾病创新药物试验
+            
+            <div class="content">
+                <div class="project-title">心血管疾病创新药物试验</div>
+                
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者姓名<span class="required">*</span></label>
+                        <input class="form-input" placeholder="请输入患者姓名" />
                     </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">姓名 <span style="color: #ff4d4f;">*</span></label>
-                        <input type="text" class="form-input" placeholder="请输入真实姓名">
-                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="form-label">手机 <span style="color: #ff4d4f;">*</span></label>
-                        <input type="tel" class="form-input" placeholder="请输入手机号码">
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者年龄<span class="required">*</span></label>
+                        <input class="form-input" type="number" placeholder="请输入患者年龄" />
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="form-label">疾病 <span style="color: #ff4d4f;">*</span></label>
-                        <select class="form-select">
-                            <option value="">请选择疾病类型</option>
-                            <option value="hypertension">高血压</option>
-                            <option value="diabetes">糖尿病</option>
-                            <option value="coronary">冠心病</option>
-                            <option value="stroke">脑卒中</option>
-                            <option value="heart_failure">心力衰竭</option>
-                            <option value="arrhythmia">心律失常</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">所在省份 <span style="color: #ff4d4f;">*</span></label>
-                        <select class="form-select" id="applyProvinceSelect" onchange="updateApplyCities()">
-                            <option value="">请选择省份</option>
-                            <option value="beijing">北京市</option>
-                            <option value="shanghai">上海市</option>
-                            <option value="guangdong">广东省</option>
-                            <option value="jiangsu">江苏省</option>
-                            <option value="zhejiang">浙江省</option>
-                            <option value="sichuan">四川省</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">所在城市 <span style="color: #ff4d4f;">*</span></label>
-                        <select class="form-select" id="applyCitySelect">
-                            <option value="">请选择城市</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">备注</label>
-                        <textarea class="form-input" style="height: 100px; resize: none;" placeholder="请输入备注信息"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">病例图片</label>
-                        <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
-                            可上传诊断报告、影像学报告和检查报告等
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
-                            <div class="upload-image-item">
-                                <input type="file" id="imageUpload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(this)">
-                                <label for="imageUpload" style="width: 100%; padding-bottom: 100%; background: #f5f5f5; border: 2px dashed #ddd; border-radius: 8px; position: relative; cursor: pointer; display: block;">
-                                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #666;">
-                                        <i class="fas fa-plus" style="font-size: 20px; margin-bottom: 4px;"></i>
-                                        <span style="font-size: 12px;">上传图片</span>
-                                    </div>
-                                </label>
-                            </div>
-                            <!-- 预览图片将在这里动态添加 -->
-                        </div>
-                    </div>
-
-                    <div style="margin: 24px 0;">
-                        <div class="agreement-checkbox" style="margin-bottom: 12px;">
-                            <input type="checkbox" id="mainAgreement" required>
-                            <label for="mainAgreement">
-                                我同意<a href="#">《用户服务协议》</a><a href="#">《隐私政策》</a><a href="#">《敏感个人信息授权书》</a>
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者性别<span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="male" />
+                                <span>男</span>
                             </label>
-                        </div>
-                        <div class="agreement-checkbox">
-                            <input type="checkbox" id="sharingAgreement" required>
-                            <label for="sharingAgreement">
-                                我已阅读并同意<a href="#">《个人信息共享清单》</a>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="female" />
+                                <span>女</span>
                             </label>
                         </div>
                     </div>
-
-                    <button class="main-btn" onclick="handleApplySubmit()" id="submitButton" disabled>
-                        提交
-                    </button>
                 </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者疾病<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择疾病类型</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者所在省份<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择省份</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">患者所在城市<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择城市</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">备注</label>
+                    <textarea class="form-textarea" placeholder="请输入患者相关备注信息"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="medical-image-label">
+                        <span>患者病历图片：</span>
+                        <span class="required">*</span>
+                        <span class="upload-tip">（病历越详细，筛选结果越准确）</span>
+                    </div>
+                    <div class="image-upload-grid">
+                        <div class="upload-btn">
+                            <span class="upload-icon">+</span>
+                            <span class="upload-text">上传图片</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-tip">
+                    提示：患者的医疗信息属于个人隐私，我们将严格保护患者隐私安全，未经患者同意，不会向任何第三方披露或转让患者的医疗信息。
+                </div>
+
+                <div class="agreement-group">
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" />
+                            我已获得患者同意，并同意
+                            <a href="#" class="link">《用户服务协议》</a>
+                            <a href="#" class="link">《隐私政策》</a>
+                            <a href="#" class="link">《敏感个人信息授权书》</a>
+                        </label>
+                    </div>
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" />
+                            我已阅读并同意
+                            <a href="#" class="link">《个人信息共享清单》</a>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="submit-btn">提交推荐</button>
             </div>
-        </div>
+        </section>
+
+        <!-- 6. 我要报名页面 -->
+        <section id="apply-page" class="page">
+            <div class="header">
+                <div class="back-btn">←</div>
+                <div class="title">项目报名</div>
+            </div>
+            
+            <div class="content">
+                <div class="project-title">项目名称</div>
+                
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">姓名<span class="required">*</span></label>
+                        <input class="form-input" placeholder="请输入姓名" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">年龄<span class="required">*</span></label>
+                        <input class="form-input" type="number" placeholder="请输入年龄" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">性别<span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="male" />
+                                <span>男</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="female" />
+                                <span>女</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">手机号<span class="required">*</span></label>
+                        <div class="phone-input-group">
+                            <input class="phone-input" type="number" placeholder="请输入手机号" />
+                            <button class="get-phone-btn">一键获取</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">疾病<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择疾病类型</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">所在省份<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择省份</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-item">
+                        <label class="form-label">所在城市<span class="required">*</span></label>
+                        <div class="picker-view">
+                            <span>请选择城市</span>
+                            <span class="picker-arrow">▼</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">备注</label>
+                    <textarea class="form-textarea" placeholder="请输入备注信息"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="medical-image-label">
+                        <span>病历图片：</span>
+                        <span class="required">*</span>
+                        <span class="upload-tip">（病历越详细，筛选结果越准确）</span>
+                    </div>
+                    <div class="image-upload-grid">
+                        <div class="upload-btn">
+                            <span class="upload-icon">+</span>
+                            <span class="upload-text">上传图片</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-tip">
+                    提示：您的医疗信息属于个人隐私，我们将严格保护您的隐私安全，未经您的同意，不会向任何第三方披露或转让您的医疗信息。
+                </div>
+
+                <div class="agreement-group">
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" />
+                            我同意
+                            <a href="#" class="link">《用户服务协议》</a>
+                            <a href="#" class="link">《隐私政策》</a>
+                            <a href="#" class="link">《敏感个人信息授权书》</a>
+                        </label>
+                    </div>
+                    <div class="agreement-item">
+                        <label>
+                            <input type="checkbox" />
+                            我已阅读并同意
+                            <a href="#" class="link">《个人信息共享清单》</a>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="submit-btn">提交报名</button>
+            </div>
+        </section>
 
         <!-- 7. 登录页面 -->
         <div class="screen">
@@ -999,7 +1720,7 @@
                     <div class="miniprogram-logo">
                         <i class="fas fa-flask"></i>
                     </div>
-                    <div class="miniprogram-name">新药雷达</div>
+                    <div class="miniprogram-name">雷达招募</div>
                     
                     <button class="wechat-login-btn" id="loginButton" disabled onclick="handlePhoneLogin()">
                         <i class="fas fa-mobile-alt"></i>
@@ -1216,6 +1937,180 @@
                     <div class="project-desc">推荐患者：王五</div>
                     <div style="margin-top: 8px;">
                         <span class="status-tag status-rejected">未通过</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12.1 推荐记录详情页面 -->
+        <div class="screen">
+            <div class="screen-title">推荐记录详情</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">推荐记录详情</div>
+            </div>
+            <div class="scrollable-content">
+                <div class="detail-container">
+                    <div class="detail-info">
+                        <div class="detail-title">心血管疾病创新药物试验</div>
+                        <div class="detail-meta">
+                            <div>推荐时间：2024-03-15 14:30</div>
+                            <div>推荐状态：<span class="status-tag status-passed">已通过</span></div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">患者信息</div>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="info-label">患者姓名</div>
+                            <div class="info-value">张三</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者年龄</div>
+                            <div class="info-value">45岁</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者性别</div>
+                            <div class="info-value">男</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者疾病</div>
+                            <div class="info-value">难治性高血压</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">所在地区</div>
+                            <div class="info-value">北京市朝阳区</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">备注信息</div>
+                            <div class="info-value">患者目前正在服用三种降压药物，血压控制不佳</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">病历图片</div>
+                    <div class="image-grid">
+                        <div class="image-item">
+                            <img src="placeholder.jpg" alt="病历图片1" />
+                        </div>
+                        <div class="image-item">
+                            <img src="placeholder.jpg" alt="病历图片2" />
+                        </div>
+                    </div>
+
+                    <div class="section-title">审核信息</div>
+                    <div class="review-info">
+                        <div class="review-item">
+                            <div class="review-label">审核时间</div>
+                            <div class="review-value">2024-03-16 10:15</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">审核结果</div>
+                            <div class="review-value">通过</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">审核意见</div>
+                            <div class="review-value">患者情况符合入选标准，建议尽快安排入组</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12.2 未通过推荐记录详情页面 -->
+        <div class="screen">
+            <div class="screen-title">推荐记录详情</div>
+            <div class="header">
+                <div class="back-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="header-title">推荐记录详情</div>
+            </div>
+            <div class="scrollable-content">
+                <div class="detail-container">
+                    <div class="detail-info">
+                        <div class="detail-title">高血压新药临床研究</div>
+                        <div class="detail-meta">
+                            <div>推荐时间：2024-03-05 09:20</div>
+                            <div>推荐状态：<span class="status-tag status-rejected">未通过</span></div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">患者信息</div>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <div class="info-label">患者姓名</div>
+                            <div class="info-value">王五</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者年龄</div>
+                            <div class="info-value">52岁</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者性别</div>
+                            <div class="info-value">男</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">患者疾病</div>
+                            <div class="info-value">原发性高血压</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">所在地区</div>
+                            <div class="info-value">上海市浦东新区</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">备注信息</div>
+                            <div class="info-value">患者有轻度肾功能不全</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">病历图片</div>
+                    <div class="image-grid">
+                        <div class="image-item">
+                            <img src="placeholder.jpg" alt="病历图片1" />
+                        </div>
+                    </div>
+
+                    <div class="section-title">审核信息</div>
+                    <div class="review-info">
+                        <div class="review-item">
+                            <div class="review-label">审核时间</div>
+                            <div class="review-value">2024-03-06 15:30</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">审核结果</div>
+                            <div class="review-value">未通过</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">未通过原因</div>
+                            <div class="review-value">患者有肾功能不全，不符合入选标准</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-label">补充建议</div>
+                            <div class="review-value">建议提供最新的肾功能检查报告，如肾功能恢复正常可重新申请</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">重新提交</div>
+                    <div class="resubmit-section">
+                        <div class="form-group">
+                            <label class="form-label">补充说明</label>
+                            <textarea class="form-textarea" placeholder="请说明补充材料的情况"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="medical-image-label">
+                                <span>补充病历图片：</span>
+                                <span class="required">*</span>
+                            </div>
+                            <div class="image-upload-grid">
+                                <div class="upload-btn">
+                                    <span class="upload-icon">+</span>
+                                    <span class="upload-text">上传图片</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="submit-btn">重新提交</button>
                     </div>
                 </div>
             </div>
