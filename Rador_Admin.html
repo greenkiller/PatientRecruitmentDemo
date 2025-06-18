@@ -420,6 +420,92 @@
             font-size: 24px;
             color: #ccc;
         }
+
+        /* 照片展示样式 */
+        .photo-gallery {
+            margin: 20px 0;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 8px 6px 6px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .no-photos {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        /* 大图预览样式 */
+        .photo-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1001;
+            cursor: pointer;
+        }
+
+        .photo-preview-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-preview-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .photo-preview-content img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
@@ -741,6 +827,14 @@
                         </select>
                     </div>
                     <div class="filter-group">
+                        <label class="form-label">用户类型</label>
+                        <select class="form-select">
+                            <option>全部类型</option>
+                            <option>医生</option>
+                            <option>非医生</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
                         <label class="form-label">注册时间</label>
                         <input type="date" class="form-input">
                     </div>
@@ -760,6 +854,7 @@
                         <tr>
                             <th>姓名</th>
                             <th>手机号</th>
+                            <th>用户类型</th>
                             <th>科室</th>
                             <th>医院</th>
                             <th>注册时间</th>
@@ -771,6 +866,7 @@
                         <tr>
                             <td>李医生</td>
                             <td>138****5678</td>
+                            <td><span class="status-badge" style="background: #e8f5e8; color: #2e7d32;">医生</span></td>
                             <td>肿瘤科</td>
                             <td>北京协和医院</td>
                             <td>2024-03-15</td>
@@ -784,6 +880,7 @@
                         <tr>
                             <td>王医生</td>
                             <td>139****1234</td>
+                            <td><span class="status-badge" style="background: #e8f5e8; color: #2e7d32;">医生</span></td>
                             <td>心内科</td>
                             <td>上海中山医院</td>
                             <td>2024-03-10</td>
@@ -791,6 +888,20 @@
                             <td>
                                 <button class="btn btn-danger" onclick="banUser(2)">禁用</button>
                                 <button class="btn btn-secondary" onclick="viewUserDetail(2)">详情</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>张先生</td>
+                            <td>137****9876</td>
+                            <td><span class="status-badge" style="background: #fff3e0; color: #f57c00;">非医生</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>2024-03-12</td>
+                            <td><span class="status-badge status-pending">待审核</span></td>
+                            <td>
+                                <button class="btn btn-success" onclick="approveUser(3)">通过</button>
+                                <button class="btn btn-danger" onclick="rejectUser(3)">拒绝</button>
+                                <button class="btn btn-secondary" onclick="viewUserDetail(3)">详情</button>
                             </td>
                         </tr>
                     </tbody>
@@ -841,6 +952,15 @@
                         </select>
                     </div>
                     <div class="filter-group">
+                        <label class="form-label">推荐类型</label>
+                        <select class="form-select">
+                            <option>全部类型</option>
+                            <option>医生推荐</option>
+                            <option>其他推荐</option>
+                            <option>患者自己报名</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
                         <label class="form-label">项目筛选</label>
                         <select class="form-select">
                             <option>全部项目</option>
@@ -864,6 +984,7 @@
                         <tr>
                             <th>患者姓名</th>
                             <th>项目名称</th>
+                            <th>推荐类型</th>
                             <th>推荐医生</th>
                             <th>推荐时间</th>
                             <th>审核状态</th>
@@ -875,6 +996,7 @@
                         <tr>
                             <td>张患者</td>
                             <td>XX-001抗癌新药疗效研究</td>
+                            <td><span class="status-badge" style="background: #e3f2fd; color: #1976d2;">医生推荐</span></td>
                             <td>李医生</td>
                             <td>2024-03-15</td>
                             <td><span class="status-badge status-pending">待审核</span></td>
@@ -888,13 +1010,28 @@
                         <tr>
                             <td>李患者</td>
                             <td>YY-002心血管药物安全性试验</td>
-                            <td>王医生</td>
+                            <td><span class="status-badge" style="background: #f3e5f5; color: #7b1fa2;">患者报名</span></td>
+                            <td>-</td>
                             <td>2024-03-12</td>
                             <td><span class="status-badge status-approved">初审通过</span></td>
                             <td>符合入选标准</td>
                             <td>
                                 <button class="btn btn-primary" onclick="confirmEnrollment(2)">确认入组</button>
                                 <button class="btn btn-secondary" onclick="viewApplicationDetail(2)">详情</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>王患者</td>
+                            <td>XX-001抗癌新药疗效研究</td>
+                            <td><span class="status-badge" style="background: #fff3e0; color: #f57c00;">其他推荐</span></td>
+                            <td>陈医生（推荐人）</td>
+                            <td>2024-03-14</td>
+                            <td><span class="status-badge status-pending">待审核</span></td>
+                            <td>家属推荐</td>
+                            <td>
+                                <button class="btn btn-success" onclick="approveApplication(3)">通过</button>
+                                <button class="btn btn-danger" onclick="rejectApplication(3)">拒绝</button>
+                                <button class="btn btn-secondary" onclick="viewApplicationDetail(3)">详情</button>
                             </td>
                         </tr>
                     </tbody>
@@ -988,13 +1125,21 @@
                 <div class="modal-title">用户详情</div>
                 <button class="close-btn" onclick="hideModal('user-detail-modal')">×</button>
             </div>
-            <div style="line-height: 1.8;">
-                <p><strong>姓名：</strong>李医生</p>
-                <p><strong>手机号：</strong>138****5678</p>
-                <p><strong>科室：</strong>肿瘤科</p>
-                <p><strong>医院：</strong>北京协和医院</p>
-                <p><strong>注册时间：</strong>2024-03-15 14:32:21</p>
-                <p><strong>推荐患者数：</strong>12人</p>
+            <div id="user-detail-content" style="line-height: 1.8;">
+                <p><strong>姓名：</strong><span id="detail-name">李医生</span></p>
+                <p><strong>手机号：</strong><span id="detail-phone">138****5678</span></p>
+                <p><strong>用户类型：</strong><span id="detail-type">医生</span></p>
+                <p><strong>所在省份：</strong><span id="detail-province">北京市</span></p>
+                <p><strong>所在城市：</strong><span id="detail-city">北京市</span></p>
+                <div id="doctor-info" style="display: block;">
+                    <p><strong>科室：</strong><span id="detail-department">肿瘤科</span></p>
+                    <p><strong>医院：</strong><span id="detail-hospital">北京协和医院</span></p>
+                    <p><strong>推荐患者数：</strong><span id="detail-patient-count">12人</span></p>
+                </div>
+                <div id="non-doctor-info" style="display: none;">
+                    <p><strong>关注项目数：</strong><span id="detail-project-count">3个</span></p>
+                </div>
+                <p><strong>注册时间：</strong><span id="detail-register-time">2024-03-15 14:32:21</span></p>
             </div>
             <div class="btn-group" style="justify-content: flex-end; margin-top: 30px;">
                 <button type="button" class="btn btn-danger">拒绝</button>
@@ -1007,7 +1152,7 @@
     <div id="application-detail-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">患者报名详情</div>
+                <div class="modal-title">详情</div>
                 <button class="close-btn" onclick="hideModal('application-detail-modal')">×</button>
             </div>
             <div style="line-height: 1.8;">
@@ -1027,6 +1172,24 @@
                 <p><strong>符合条件：</strong>年龄、诊断、病理分期</p>
                 <p><strong>需要确认：</strong>既往治疗史、肝肾功能</p>
                 
+                <h4 style="margin: 20px 0 15px; color: #667eea;">上传资料</h4>
+                <div class="photo-gallery">
+                    <div class="photo-grid" id="patientPhotos">
+                        <div class="photo-item" onclick="previewPhoto('https://via.placeholder.com/300x200/667eea/ffffff?text=检查报告1')">
+                            <img src="https://via.placeholder.com/300x200/667eea/ffffff?text=检查报告1" alt="检查报告">
+                            <div class="photo-label">检查报告</div>
+                        </div>
+                        <div class="photo-item" onclick="previewPhoto('https://via.placeholder.com/300x200/28a745/ffffff?text=病历资料')">
+                            <img src="https://via.placeholder.com/300x200/28a745/ffffff?text=病历资料" alt="病历资料">
+                            <div class="photo-label">病历资料</div>
+                        </div>
+                        <div class="photo-item" onclick="previewPhoto('https://via.placeholder.com/300x200/dc3545/ffffff?text=影像学资料')">
+                            <img src="https://via.placeholder.com/300x200/dc3545/ffffff?text=影像学资料" alt="影像学资料">
+                            <div class="photo-label">影像学资料</div>
+                        </div>
+                    </div>
+                </div>
+                
                 <h4 style="margin: 20px 0 15px; color: #667eea;">审核备注</h4>
                 <textarea class="form-input" rows="3" placeholder="请输入审核备注信息"></textarea>
             </div>
@@ -1034,6 +1197,13 @@
                 <button type="button" class="btn btn-danger">拒绝</button>
                 <button type="button" class="btn btn-success">初审通过</button>
             </div>
+        </div>
+    </div>
+
+    <!-- 照片预览模态框 -->
+    <div id="photo-preview-modal" class="photo-preview-modal">
+        <div class="photo-preview-content">
+            <img id="preview-image" src="" alt="预览图片">
         </div>
     </div>
 
@@ -1107,6 +1277,70 @@
 
         function viewUserDetail(id) {
             showModal('user-detail-modal');
+            // 根据用户ID加载用户详情信息
+            loadUserDetail(id);
+        }
+
+        function loadUserDetail(userId) {
+            // 示例用户数据
+            const users = {
+                1: {
+                    name: '李医生',
+                    phone: '138****5678',
+                    type: '医生',
+                    province: '北京市',
+                    city: '北京市',
+                    department: '肿瘤科',
+                    hospital: '北京协和医院',
+                    patientCount: '12人',
+                    registerTime: '2024-03-15 14:32:21'
+                },
+                2: {
+                    name: '王医生',
+                    phone: '139****1234',
+                    type: '医生',
+                    province: '上海市',
+                    city: '上海市',
+                    department: '心内科',
+                    hospital: '上海中山医院',
+                    patientCount: '8人',
+                    registerTime: '2024-03-10 09:15:33'
+                },
+                3: {
+                    name: '张先生',
+                    phone: '137****9876',
+                    type: '非医生',
+                    province: '广东省',
+                    city: '广州市',
+                    occupation: '患者家属',
+                    projectCount: '3个',
+                    registerTime: '2024-03-12 16:22:45'
+                }
+            };
+
+            const user = users[userId];
+            if (user) {
+                document.getElementById('detail-name').textContent = user.name;
+                document.getElementById('detail-phone').textContent = user.phone;
+                document.getElementById('detail-type').textContent = user.type;
+                document.getElementById('detail-province').textContent = user.province;
+                document.getElementById('detail-city').textContent = user.city;
+                document.getElementById('detail-register-time').textContent = user.registerTime;
+
+                // 根据用户类型显示不同的信息
+                if (user.type === '医生') {
+                    document.getElementById('doctor-info').style.display = 'block';
+                    document.getElementById('non-doctor-info').style.display = 'none';
+                    document.getElementById('detail-department').textContent = user.department;
+                    document.getElementById('detail-hospital').textContent = user.hospital;
+                    document.getElementById('detail-patient-count').textContent = user.patientCount;
+                } else {
+                    document.getElementById('doctor-info').style.display = 'none';
+                    document.getElementById('non-doctor-info').style.display = 'block';
+                    document.getElementById('detail-occupation').textContent = user.occupation;
+                    document.getElementById('detail-project-count').textContent = user.projectCount;
+                }
+            }
         }
 
         // 报名管理相关函数
@@ -1131,12 +1365,77 @@
 
         function viewApplicationDetail(id) {
             showModal('application-detail-modal');
+            // 根据id加载对应的患者照片
+            loadPatientPhotos(id);
+        }
+
+        // 照片相关函数
+        function previewPhoto(imageSrc) {
+            document.getElementById('preview-image').src = imageSrc;
+            document.getElementById('photo-preview-modal').classList.add('active');
+        }
+
+        function closePhotoPreview() {
+            document.getElementById('photo-preview-modal').classList.remove('active');
+        }
+
+        function loadPatientPhotos(patientId) {
+            // 这里可以根据患者ID加载真实的照片数据
+            // 目前使用示例数据
+            const photoGrid = document.getElementById('patientPhotos');
+            
+            // 示例：根据不同患者ID加载不同的照片
+            let photos = [];
+            if (patientId === 1) {
+                photos = [
+                    { src: 'https://via.placeholder.com/300x200/667eea/ffffff?text=检查报告1', label: '血常规检查报告' },
+                    { src: 'https://via.placeholder.com/300x200/28a745/ffffff?text=病历资料', label: '门诊病历' },
+                    { src: 'https://via.placeholder.com/300x200/dc3545/ffffff?text=CT影像', label: 'CT扫描结果' },
+                    { src: 'https://via.placeholder.com/300x200/ffc107/ffffff?text=病理报告', label: '病理活检报告' }
+                ];
+            } else if (patientId === 2) {
+                photos = [
+                    { src: 'https://via.placeholder.com/300x200/6f42c1/ffffff?text=心电图', label: '心电图检查' },
+                    { src: 'https://via.placeholder.com/300x200/20c997/ffffff?text=超声报告', label: '心脏超声报告' }
+                ];
+            } else {
+                photos = [
+                    { src: 'https://via.placeholder.com/300x200/fd7e14/ffffff?text=检验报告', label: '生化检验报告' },
+                    { src: 'https://via.placeholder.com/300x200/e83e8c/ffffff?text=影像资料', label: 'MRI影像资料' },
+                    { src: 'https://via.placeholder.com/300x200/6610f2/ffffff?text=用药记录', label: '既往用药记录' }
+                ];
+            }
+
+            // 清空现有照片
+            photoGrid.innerHTML = '';
+
+            if (photos.length === 0) {
+                photoGrid.innerHTML = '<div class="no-photos">暂无上传资料</div>';
+            } else {
+                photos.forEach(photo => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.onclick = () => previewPhoto(photo.src);
+                    photoItem.innerHTML = `
+                        <img src="${photo.src}" alt="${photo.label}">
+                        <div class="photo-label">${photo.label}</div>
+                    `;
+                    photoGrid.appendChild(photoItem);
+                });
+            }
         }
 
         // 页面加载完成后的初始化
         document.addEventListener('DOMContentLoaded', function() {
             // 可以在这里添加初始化代码
             console.log('雷达招募后台管理系统已加载');
+            
+            // 添加照片预览模态框的点击关闭功能
+            document.getElementById('photo-preview-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closePhotoPreview();
+                }
+            });
         });
     </script>
 </body>
